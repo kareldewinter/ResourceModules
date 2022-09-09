@@ -192,7 +192,7 @@ resource dataFactory 'Microsoft.DataFactory/factories@2018-06-01' = {
       }, (gitRepoType == 'FactoryVSTSConfiguration' ? {
         projectName: gitProjectName
       } : {}), {})
-    publicNetworkAccess: !empty(publicNetworkAccess) ? any(publicNetworkAccess) : (!empty(privateEndpoints) ? 'Disabled' : null)
+    // publicNetworkAccess: !empty(publicNetworkAccess) ? any(publicNetworkAccess) : (!empty(privateEndpoints) ? 'Disabled' : null)
     encryption: !empty(cMKKeyName) ? {
       identity: {
         userAssignedIdentity: cMKUserAssignedIdentityResourceId

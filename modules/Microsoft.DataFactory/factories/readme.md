@@ -436,7 +436,6 @@ module factories './Microsoft.DataFactory/factories/deploy.bicep' = {
         subnetResourceId: '/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/virtualNetworks/adp-<<namePrefix>>-az-vnet-x-001/subnets/<<namePrefix>>-az-subnet-x-005-privateEndpoints'
       }
     ]
-    publicNetworkAccess: 'Disabled'
     roleAssignments: [
       {
         principalIds: [
@@ -527,9 +526,6 @@ module factories './Microsoft.DataFactory/factories/deploy.bicep' = {
           "subnetResourceId": "/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/virtualNetworks/adp-<<namePrefix>>-az-vnet-x-001/subnets/<<namePrefix>>-az-subnet-x-005-privateEndpoints"
         }
       ]
-    },
-    "publicNetworkAccess": {
-      "value": "Disabled"
     },
     "roleAssignments": {
       "value": [

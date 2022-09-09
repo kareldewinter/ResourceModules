@@ -35,9 +35,9 @@
                 }
             }
         },
-        "publicNetworkAccess": {
-            "value": "Disabled"
-        },
+        // "publicNetworkAccess": {
+        //     "value": "Disabled"
+        // },
         "gitConfigureLater": {
             "value": true
         },
