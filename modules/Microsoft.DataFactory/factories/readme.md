@@ -424,16 +424,6 @@ module factories './Microsoft.DataFactory/factories/deploy.bicep' = {
       }
     }
     lock: 'CanNotDelete'
-    managedPrivateEndpoints: [
-      {
-        fqdns: [
-          'adp<<namePrefix>>azsax001.blob.core.windows.net'
-        ]
-        groupId: 'blob'
-        name: 'adp<<namePrefix>>azsax001-managed-privateEndpoint'
-        privateLinkResourceId: '/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Storage/storageAccounts/adp<<namePrefix>>azsax001'
-      }
-    ]
     managedVirtualNetworkName: 'default'
     privateEndpoints: [
       {
@@ -521,18 +511,6 @@ module factories './Microsoft.DataFactory/factories/deploy.bicep' = {
     },
     "lock": {
       "value": "CanNotDelete"
-    },
-    "managedPrivateEndpoints": {
-      "value": [
-        {
-          "fqdns": [
-            "adp<<namePrefix>>azsax001.blob.core.windows.net"
-          ],
-          "groupId": "blob",
-          "name": "adp<<namePrefix>>azsax001-managed-privateEndpoint",
-          "privateLinkResourceId": "/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Storage/storageAccounts/adp<<namePrefix>>azsax001"
-        }
-      ]
     },
     "managedVirtualNetworkName": {
       "value": "default"
