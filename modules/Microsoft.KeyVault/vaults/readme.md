@@ -396,44 +396,7 @@ The following module usage examples are retrieved from the content of the files 
    >**Note**: The name of each example is based on the name of the file from which it is taken.
    >**Note**: Each example lists all the required parameters first, followed by the rest - each in alphabetical order.
 
-<h3>Example 1: Min</h3>
-
-<details>
-
-<summary>via Bicep module</summary>
-
-```bicep
-module vaults './Microsoft.KeyVault/vaults/deploy.bicep' = {
-  name: '${uniqueString(deployment().name)}-Vaults'
-  params: {
-    name: '<<namePrefix>>-az-kv-min-002'
-  }
-}
-```
-
-</details>
-<p>
-
-<details>
-
-<summary>via JSON Parameter file</summary>
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "name": {
-      "value": "<<namePrefix>>-az-kv-min-002"
-    }
-  }
-}
-```
-
-</details>
-<p>
-
-<h3>Example 2: Parameters Bug</h3>
+<h3>Example 1: Bug</h3>
 
 <details>
 
@@ -528,6 +491,43 @@ module vaults './Microsoft.KeyVault/vaults/deploy.bicep' = {
     },
     "vaultSku": {
       "value": "standard"
+    }
+  }
+}
+```
+
+</details>
+<p>
+
+<h3>Example 2: Min</h3>
+
+<details>
+
+<summary>via Bicep module</summary>
+
+```bicep
+module vaults './Microsoft.KeyVault/vaults/deploy.bicep' = {
+  name: '${uniqueString(deployment().name)}-Vaults'
+  params: {
+    name: '<<namePrefix>>-az-kv-min-002'
+  }
+}
+```
+
+</details>
+<p>
+
+<details>
+
+<summary>via JSON Parameter file</summary>
+
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "value": "<<namePrefix>>-az-kv-min-002"
     }
   }
 }
