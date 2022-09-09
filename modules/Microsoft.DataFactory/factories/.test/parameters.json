@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "value": "<<namePrefix>>-adf-001"
+            "value": "<<namePrefix>>-adf-x-001"
         },
         "lock": {
             "value": "CanNotDelete"

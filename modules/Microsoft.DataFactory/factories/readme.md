@@ -402,7 +402,7 @@ module factories './Microsoft.DataFactory/factories/deploy.bicep' = {
   name: '${uniqueString(deployment().name)}-Factories'
   params: {
     // Required parameters
-    name: '<<namePrefix>>-adf-001'
+    name: '<<namePrefix>>-adf-x-001'
     // Non-required parameters
     cMKKeyName: 'keyEncryptionKey'
     cMKKeyVaultResourceId: '/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.KeyVault/vaults/adp-<<namePrefix>>-az-kv-nopr-002'
@@ -477,7 +477,7 @@ module factories './Microsoft.DataFactory/factories/deploy.bicep' = {
   "parameters": {
     // Required parameters
     "name": {
-      "value": "<<namePrefix>>-adf-001"
+      "value": "<<namePrefix>>-adf-x-001"
     },
     // Non-required parameters
     "cMKKeyName": {
