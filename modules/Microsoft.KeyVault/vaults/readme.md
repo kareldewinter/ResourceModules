@@ -433,7 +433,110 @@ module vaults './Microsoft.KeyVault/vaults/deploy.bicep' = {
 </details>
 <p>
 
-<h3>Example 2: Parameters</h3>
+<h3>Example 2: Parameters Bug</h3>
+
+<details>
+
+<summary>via Bicep module</summary>
+
+```bicep
+module vaults './Microsoft.KeyVault/vaults/deploy.bicep' = {
+  name: '${uniqueString(deployment().name)}-Vaults'
+  params: {
+    // Required parameters
+    name: '<<namePrefix>>-az-kv-x-003'
+    // Non-required parameters
+    enableRbacAuthorization: true
+    enableSoftDelete: true
+    enableVaultForDeployment: false
+    enableVaultForDiskEncryption: false
+    enableVaultForTemplateDeployment: true
+    networkAcls: {
+      bypass: 'AzureServices'
+      defaultAction: 'Deny'
+      ipRules: []
+      virtualNetworkRules: []
+    }
+    privateEndpoints: [
+      {
+        privateDnsZoneGroup: {
+          privateDNSResourceIds: [
+            '/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net'
+          ]
+        }
+        service: 'vault'
+        subnetResourceId: '/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/virtualNetworks/adp-<<namePrefix>>-az-vnet-x-001/subnets/<<namePrefix>>-az-subnet-x-005-privateEndpoints'
+      }
+    ]
+    vaultSku: 'standard'
+  }
+}
+```
+
+</details>
+<p>
+
+<details>
+
+<summary>via JSON Parameter file</summary>
+
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    // Required parameters
+    "name": {
+      "value": "<<namePrefix>>-az-kv-x-003"
+    },
+    // Non-required parameters
+    "enableRbacAuthorization": {
+      "value": true
+    },
+    "enableSoftDelete": {
+      "value": true
+    },
+    "enableVaultForDeployment": {
+      "value": false
+    },
+    "enableVaultForDiskEncryption": {
+      "value": false
+    },
+    "enableVaultForTemplateDeployment": {
+      "value": true
+    },
+    "networkAcls": {
+      "value": {
+        "bypass": "AzureServices",
+        "defaultAction": "Deny",
+        "ipRules": [],
+        "virtualNetworkRules": []
+      }
+    },
+    "privateEndpoints": {
+      "value": [
+        {
+          "privateDnsZoneGroup": {
+            "privateDNSResourceIds": [
+              "/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net"
+            ]
+          },
+          "service": "vault",
+          "subnetResourceId": "/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/virtualNetworks/adp-<<namePrefix>>-az-vnet-x-001/subnets/<<namePrefix>>-az-subnet-x-005-privateEndpoints"
+        }
+      ]
+    },
+    "vaultSku": {
+      "value": "standard"
+    }
+  }
+}
+```
+
+</details>
+<p>
+
+<h3>Example 3: Parameters</h3>
 
 <details>
 
