@@ -441,6 +441,17 @@ module factories './Microsoft.DataFactory/factories/deploy.bicep' = {
       }
     ]
     managedVirtualNetworkName: 'default'
+    privateEndpoints: [
+      {
+        privateDnsZoneGroups: {
+          privateDNSResourceIds: [
+            '/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/privateDnsZones/privatelink.datafactory.azure.net'
+          ]
+        }
+        service: 'dataFactory'
+        subnetResourceId: '/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/virtualNetworks/adp-<<namePrefix>>-az-vnet-x-001/subnets/<<namePrefix>>-az-subnet-x-005-privateEndpoints'
+      }
+    ]
     roleAssignments: [
       {
         principalIds: [
@@ -536,6 +547,19 @@ module factories './Microsoft.DataFactory/factories/deploy.bicep' = {
     },
     "managedVirtualNetworkName": {
       "value": "default"
+    },
+    "privateEndpoints": {
+      "value": [
+        {
+          "privateDnsZoneGroups": {
+            "privateDNSResourceIds": [
+              "/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/privateDnsZones/privatelink.datafactory.azure.net"
+            ]
+          },
+          "service": "dataFactory",
+          "subnetResourceId": "/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/virtualNetworks/adp-<<namePrefix>>-az-vnet-x-001/subnets/<<namePrefix>>-az-subnet-x-005-privateEndpoints"
+        }
+      ]
     },
     "roleAssignments": {
       "value": [
