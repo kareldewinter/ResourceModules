@@ -430,18 +430,17 @@ module factories './Microsoft.DataFactory/factories/deploy.bicep' = {
       }
     ]
     lock: 'CanNotDelete'
-    managedVirtualNetworkName: 'default'
-    privateEndpoints: [
+    managedPrivateEndpoints: [
       {
-        privateDnsZoneGroups: {
-          privateDNSResourceIds: [
-            '/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/privateDnsZones/privatelink.datafactory.azure.net'
-          ]
-        }
-        service: 'dataFactory'
-        subnetResourceId: '/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/virtualNetworks/adp-<<namePrefix>>-az-vnet-x-001/subnets/<<namePrefix>>-az-subnet-x-005-privateEndpoints'
+        fqdns: [
+          'adp<<namePrefix>>azsax001.blob.core.windows.net'
+        ]
+        groupId: 'blob'
+        name: 'adp<<namePrefix>>azsax001-managed-privateEndpoint'
+        privateLinkResourceId: '/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Storage/storageAccounts/adp<<namePrefix>>azsax001'
       }
     ]
+    managedVirtualNetworkName: 'default'
     roleAssignments: [
       {
         principalIds: [
@@ -523,21 +522,20 @@ module factories './Microsoft.DataFactory/factories/deploy.bicep' = {
     "lock": {
       "value": "CanNotDelete"
     },
-    "managedVirtualNetworkName": {
-      "value": "default"
-    },
-    "privateEndpoints": {
+    "managedPrivateEndpoints": {
       "value": [
         {
-          "privateDnsZoneGroups": {
-            "privateDNSResourceIds": [
-              "/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/privateDnsZones/privatelink.datafactory.azure.net"
-            ]
-          },
-          "service": "dataFactory",
-          "subnetResourceId": "/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/virtualNetworks/adp-<<namePrefix>>-az-vnet-x-001/subnets/<<namePrefix>>-az-subnet-x-005-privateEndpoints"
+          "fqdns": [
+            "adp<<namePrefix>>azsax001.blob.core.windows.net"
+          ],
+          "groupId": "blob",
+          "name": "adp<<namePrefix>>azsax001-managed-privateEndpoint",
+          "privateLinkResourceId": "/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Storage/storageAccounts/adp<<namePrefix>>azsax001"
         }
       ]
+    },
+    "managedVirtualNetworkName": {
+      "value": "default"
     },
     "roleAssignments": {
       "value": [
@@ -556,6 +554,71 @@ module factories './Microsoft.DataFactory/factories/deploy.bicep' = {
       "value": {
         "/subscriptions/<<subscriptionId>>/resourcegroups/validation-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/adp-<<namePrefix>>-az-msi-x-001": {}
       }
+    }
+  }
+}
+```
+
+</details>
+<p>
+
+<h3>Example 3: Pe</h3>
+
+<details>
+
+<summary>via Bicep module</summary>
+
+```bicep
+module factories './Microsoft.DataFactory/factories/deploy.bicep' = {
+  name: '${uniqueString(deployment().name)}-Factories'
+  params: {
+    // Required parameters
+    name: '<<namePrefix>>-adf-pe-001'
+    // Non-required parameters
+    privateEndpoints: [
+      {
+        privateDnsZoneGroups: {
+          privateDNSResourceIds: [
+            '/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/privateDnsZones/privatelink.datafactory.azure.net'
+          ]
+        }
+        service: 'dataFactory'
+        subnetResourceId: '/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/virtualNetworks/adp-<<namePrefix>>-az-vnet-x-001/subnets/<<namePrefix>>-az-subnet-x-005-privateEndpoints'
+      }
+    ]
+  }
+}
+```
+
+</details>
+<p>
+
+<details>
+
+<summary>via JSON Parameter file</summary>
+
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    // Required parameters
+    "name": {
+      "value": "<<namePrefix>>-adf-pe-001"
+    },
+    // Non-required parameters
+    "privateEndpoints": {
+      "value": [
+        {
+          "privateDnsZoneGroups": {
+            "privateDNSResourceIds": [
+              "/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/privateDnsZones/privatelink.datafactory.azure.net"
+            ]
+          },
+          "service": "dataFactory",
+          "subnetResourceId": "/subscriptions/<<subscriptionId>>/resourceGroups/validation-rg/providers/Microsoft.Network/virtualNetworks/adp-<<namePrefix>>-az-vnet-x-001/subnets/<<namePrefix>>-az-subnet-x-005-privateEndpoints"
+        }
+      ]
     }
   }
 }
