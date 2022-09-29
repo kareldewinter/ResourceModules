@@ -72,10 +72,11 @@ function Get-DeploymentTargetResourceListInner {
                     if ($deployment -match '/resourceGroups/') {
                         $resourceGroupName = $deployment.split('/resourceGroups/')[1].Split('/')[0]
                         Write-Verbose ('### Found name [{0}] and resourceGroupName [{1}]' -f $name, $resourceGroupName) -Verbose
+                        [array]$resultSet += Get-DeploymentTargetResourceListInner -Name $name -ResourceGroupName $ResourceGroupName -Scope 'resourcegroup'
                     } else {
                         Write-Verbose ('### Found name [{0}]' -f $name) -Verbose
+                        [array]$resultSet += Get-DeploymentTargetResourceListInner -name $name -Scope 'subscription'
                     }
-                    [array]$resultSet += Get-DeploymentTargetResourceListInner -Name $name -ResourceGroupName $ResourceGroupName -Scope 'resourcegroup'
                 }
             } else {
                 # In case the resource group itself was already deleted, there is no need to try and fetch deployments from it
