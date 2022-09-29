@@ -67,9 +67,14 @@ function Get-DeploymentTargetResourceListInner {
                     [array]$resultSet += $deployment
                 }
                 foreach ($deployment in ($deploymentTargets | Where-Object { $_ -match '/deployments/' } )) {
-                    Write-Verbose ('Found deployment [{0}]' -f $deployment) -Verbose
+                    Write-Verbose ('### Found deployment [{0}]' -f $deployment) -Verbose
                     $name = Split-Path $deployment -Leaf
-                    $resourceGroupName = $deployment.split('/resourceGroups/')[1].Split('/')[0]
+                    if ($deployment -match '/resourceGroups/') {
+                        $resourceGroupName = $deployment.split('/resourceGroups/')[1].Split('/')[0]
+                        Write-Verbose ('### Found name [{0}] and resourceGroupName [{1}]' -f $name, $resourceGroupName) -Verbose
+                    } else {
+                        Write-Verbose ('### Found name [{0}]' -f $name) -Verbose
+                    }
                     [array]$resultSet += Get-DeploymentTargetResourceListInner -Name $name -ResourceGroupName $ResourceGroupName -Scope 'resourcegroup'
                 }
             } else {
